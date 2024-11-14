@@ -7,6 +7,8 @@ body{
     font-family: var(--main-font);
     background-image: url(./img/background.webp);
     margin: 0px;
+    background-size: cover;
+    background-position: center;
 }
 
 h1{
@@ -24,12 +26,6 @@ header {
 
 .viniloImg {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-.randyImg {
-    width: 50%;
     height: auto;
     border-radius: 8px;
 }
@@ -89,15 +85,87 @@ header {
 .image{
     margin-top: 5rem;
     flex: 1;
-    align-items: center;
-    display: flex;
+    background-size: cover;
+    background-position: center;
 }
 
-.imageRandy {
-    margin-top: 5rem;
-    flex: 1;
-    align-content: center;
+/* Footer */
+.footer {
+    background-color: #713424;
+    color: #fff;
+    padding: 40px 0 20px;
+    text-align: center;
+}
+
+.footer-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Logo del footer */
+.footer-logo-image {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+/* Navegación en el footer */
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
     justify-content: center;
-    position: relative;
+}
+
+.footer-nav a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+    color: red;
+}
+
+/* Redes sociales */
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.social-icon:hover {
+    color: red;
+}
+
+/* Pie de página inferior */
+.footer-bottom {
+    border-top: 2px solid black;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-nav ul {
+        flex-direction: column;
+    }
 }
