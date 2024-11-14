@@ -7,8 +7,6 @@ body{
     font-family: var(--main-font);
     background-image: url(./img/background.webp);
     margin: 0px;
-    background-size: cover;
-    background-position: center;
 }
 
 h1{
@@ -26,6 +24,12 @@ header {
 
 .viniloImg {
     width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.randyImg {
+    width: 50%;
     height: auto;
     border-radius: 8px;
 }
@@ -85,8 +89,17 @@ header {
 .image{
     margin-top: 5rem;
     flex: 1;
-    background-size: cover;
-    background-position: center;
+    align-items: center;
+    display: flex;
+}
+
+.imageRandy {
+    margin-top: 5rem;
+    flex: 1;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
 /* Footer */
