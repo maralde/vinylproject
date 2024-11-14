@@ -1,0 +1,86 @@
+:root {
+    --main-font: 'Anton SC';
+    --secondary-font: 'Lato';
+}
+
+body{
+    font-family: var(--main-font);
+    background-image: url(./img/background.webp);
+    margin: 0px;
+}
+
+h1{
+    margin: 0;
+}
+
+header {
+    text-align: center;
+    color: brown;
+}
+
+.descr{
+    font-family: var(--secondary-font);
+}
+
+.viniloImg {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 5rem auto;
+    width: 1000px;
+    padding: 30px;
+    border: 1px solid red;
+    box-shadow: 2px 2px 8px 4px #d3d3d3d1;
+    border-radius: 15px;
+}
+
+.title {
+    font-size: 24px;
+    padding: 10px 10px 0 10px;
+    text-align: center;
+}
+
+.bodycard {
+    padding: 10px;
+    text-align: center;
+}
+
+.button {
+    background-color: #713424;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    align-self: center;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.button:hover{
+    background-color: red;
+
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.text {
+    flex: 1;
+    padding-right: 20px;
+    text-align: center;
+}
+
+.image{
+    margin-top: 5rem;
+    flex: 1;
+}
