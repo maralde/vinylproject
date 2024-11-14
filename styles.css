@@ -28,6 +28,12 @@ header {
     border-radius: 8px;
 }
 
+.randyImg {
+    width: 50%;
+    height: auto;
+    border-radius: 8px;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -83,4 +89,15 @@ header {
 .image{
     margin-top: 5rem;
     flex: 1;
+    align-items: center;
+    display: flex;
+}
+
+.imageRandy {
+    margin-top: 5rem;
+    flex: 1;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+
 }
