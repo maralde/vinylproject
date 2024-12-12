@@ -3,13 +3,13 @@
     --secondary-font: 'Lato';
 }
 
-body{
+body {
     font-family: var(--main-font);
     background-image: url(./img/background.webp);
     margin: 0px;
 }
 
-h1{
+h1 {
     margin: 0;
 }
 
@@ -18,8 +18,56 @@ header {
     color: brown;
 }
 
-.descr{
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+}
+
+.header-content {
+    text-align: center;
+    flex: 1;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.descr {
     font-family: var(--secondary-font);
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #343a40;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
 }
 
 .viniloImg {
@@ -68,7 +116,7 @@ header {
     color: white;
 }
 
-.button:hover{
+.button:hover {
     background-color: red;
 
 }
@@ -86,7 +134,7 @@ header {
     text-align: center;
 }
 
-.image{
+.image {
     margin-top: 5rem;
     flex: 1;
     align-items: center;
@@ -179,6 +227,7 @@ header {
         flex-direction: column;
         text-align: center;
     }
+
     .footer-nav ul {
         flex-direction: column;
     }
