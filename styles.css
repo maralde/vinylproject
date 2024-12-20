@@ -43,7 +43,7 @@ header {
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: #343a40;
+    background-color: #3f0000 ;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -53,13 +53,13 @@ header {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #ffffff;
+    color: white;
     display: block;
     transition: 0.3s;
 }
 
 .sidebar a:hover {
-    color: #f1f1f1;
+    color: red;
 }
 
 .sidebar .closebtn {
@@ -69,6 +69,29 @@ header {
     font-size: 36px;
     margin-left: 50px;
 }
+
+.panel {
+    color:white;
+    padding: 8px 8px 8px 32px;
+    font-size: 16px;
+}
+
+.text-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 25px;
+    padding: 8px 8px 8px 32px;
+}
+.text-button:hover {
+    color: red; /* Cambia el color al pasar el mouse */
+}
+.text-button:focus {
+    outline: none;
+}
+
+
 
 .viniloImg {
     width: 100%;
@@ -171,7 +194,6 @@ header {
 .footer-logo-image {
     max-width: 150px;
     margin-bottom: 10px;
-    margin-right: 20rem;
 }
 
 /* Navegación en el footer */
