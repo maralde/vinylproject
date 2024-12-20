@@ -7,6 +7,7 @@ body {
     font-family: var(--main-font);
     background-image: url(./img/background.webp);
     margin: 0px;
+    background-size: cover;
 }
 
 h1 {
@@ -254,3 +255,35 @@ header {
         flex-direction: column;
     }
 }
+
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+  
+  .marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite; /* 10s de duración, bucle infinito */
+  }
+  
+  .marquee span {
+    display: inline-block;
+    padding-left: 80%;
+  }
+  
+  /* Animación */
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%); /* Comienza fuera de la pantalla, a la derecha */
+    }
+    100% {
+      transform: translateX(-100%); /* Termina fuera de la pantalla, a la izquierda */
+    }
+  }
