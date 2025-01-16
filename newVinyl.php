@@ -13,7 +13,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f8f9fa;
+            background-image: url(./img/background.webp);
+            background-size: cover;
         }
         .card {
             width: 400px;
@@ -22,17 +23,17 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .card-header {
-            background-color: #007bff;
+            background-color: brown;
             color: #fff;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
         .btn-primary {
-            background-color: #007bff;
+            background-color: brown;
             border: none;
         }
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: brown;
         }
         input[type="text"], input[type="number"], input[type="file"] {
             margin-top: 10px;
