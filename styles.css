@@ -287,3 +287,18 @@ header {
       transform: translateX(-100%); /* Termina fuera de la pantalla, a la izquierda */
     }
   }
+
+  .text-container {
+    transition: height 0.3s ease;
+}
+.show-more-button {
+    margin-top: 10px;
+    background-color: brown;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+.show-more-button:hover {
+    background-color: brown;
+}
