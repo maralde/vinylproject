@@ -78,6 +78,9 @@
             </form>
             <div id="funciona" class="mt-3 text-center"></div>
         </div>
+        <div class="d-grid">
+            <a href="listar_vinilos.php">Volver a gestión</a>
+        </div>
     </div>
 </body>
 <script>
