@@ -4,7 +4,7 @@ include_once('./php/configuration.php');
 $sql = "SELECT * FROM vinilos";
 $result = $conn->query($sql);
 
-$tabla = "<div class='container mt-4'><div class='row justify-content-center'>"; // Inicio del contenedor y fila
+$tabla = "<div class='container mx-auto mt-4'><div class='flex flex-wrap justify-center'>"; // Inicio del contenedor y fila
 if ($result->num_rows > 0) {    
     // Generar las filas dentro del bucle
     while ($row = $result->fetch_assoc()) {
@@ -13,14 +13,16 @@ if ($result->num_rows > 0) {
         $descripcionLarga = $descripcion;
 
         $tabla .= "
-            <div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex justify-content-center align-items-stretch'>
-                <div class='card shadow-sm' style='border-radius: 20px; max-width: 120%; width: 120%;'> <!-- Ajuste de ancho de la card -->
-                    <img src='." . $row["imagen"] . "' alt='Imagen de " . $row["name"] . "' class='img-fluid' style='max-height: 200px; object-fit: contain;'>
-                    <div class='card-body' style='background-color:rgb(227, 227, 227); border-radius: 0 0 20px 20px;'>
-                        <h5 class='card-title'>" . $row['name'] . "</h5>
-                        <p style='font-size:20px; margin-top:15px; margin-left:10%;font-weight: bold; color:red'>" . $row["precio"] . "€</p>
-                        <p class='card-text text-container' data-full-text='" . $descripcionLarga . "' data-short-text='" . $descripcionCorta . "'>" . ((strlen($descripcion) > 200) ? $descripcionCorta . "..." : $descripcion) . "</p>
-                        <button class='show-more-button' onclick='toggleText(this)'>Mostrar más</button>
+            <div class='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4 flex justify-center items-stretch'>
+                <div class='max-w-xs w-full h-full shadow-lg rounded-lg overflow-hidden flex flex-col'>
+                    <div class='bg-white'>
+                        <img src='." . $row["imagen"] . "' alt='Imagen de " . $row["name"] . "' class='w-full h-48 object-contain'>
+                    </div>
+                    <div class='p-4 bg-gray-200 flex-grow'>
+                        <h5 class='text-xl font-bold'>" . $row['name'] . "</h5>
+                        <p class='text-lg mt-4 ml-4 font-bold text-red-500'>" . $row["precio"] . "€</p>
+                        <p class='card-text' data-full-text='" . $descripcionLarga . "' data-short-text='" . $descripcionCorta . "'>" . ((strlen($descripcion) > 200) ? $descripcionCorta . "..." : $descripcion) . "</p>
+                        <button class='mt-2 text-blue-500' onclick='toggleText(this)'>Mostrar más</button>
                     </div>
                 </div>
             </div>
@@ -37,11 +39,13 @@ $tabla .= "</div></div>"; // Cerrar el contenedor y la fila
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    
     <style>
         .text-container {
             transition: height 0.3s ease;
@@ -60,11 +64,12 @@ $tabla .= "</div></div>"; // Cerrar el contenedor y la fila
     </style>
 </head>
 <body>
-    <div id="mySidebar" class="sidebar">
+<div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="index.html" class="sidebarlink">Home</a>
         <a href="tienda.php" class="sidebarlink">Tienda</a>
         <a href="listar_vinilos.php" class="sidebarlink">Gestión</a>
+        <a href="newVinyl.php" class="sidebarlink">Añadir Vinilo</a>
         <button class="text-button">Leer Más</button>
         <div class="panel">
             <p>Aqui se despliega más texto</p>

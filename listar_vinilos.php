@@ -84,6 +84,7 @@ if($result->num_rows > 0) {
         <a href="index.html" class="sidebarlink">Home</a>
         <a href="tienda.php" class="sidebarlink">Tienda</a>
         <a href="listar_vinilos.php" class="sidebarlink">Gestión</a>
+        <a href="newVinyl.php" class="sidebarlink">Añadir Vinilo</a>
         <button class="text-button">Leer Más</button>
         <div class="panel">
             <p>Aqui se despliega más texto</p>
@@ -92,8 +93,8 @@ if($result->num_rows > 0) {
 
     <header class="d-flex justify-content-between align-items-center p-3" id="inicio">
         <div class="header-content text-center">
-            <h1>Tienda Vinyl Zone</h1>
-            <p>Aqui podras encontrar todos los vinilos que tenemos a la venta en Vinil Zone</p>
+            <h1>Listado de Vinilos</h1>
+            <p>Aqui podras encontrar listados todos los vinilos que tenemos en Vinil Zone</p>
         </div>
         <button class="btn btn-danger" onclick="openNav()">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
@@ -164,7 +165,7 @@ if($result->num_rows > 0) {
             var activo = checkbox.checked ? 1 : 0;
 
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "update_vinilos_ajax.php", true);
+            xhr.open("POST", "./php/update_vinilos_ajax.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {

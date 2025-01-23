@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             display: flex;
@@ -39,6 +40,86 @@
             margin-top: 10px;
         }
     </style>
+</head>
+<body>
+    <div class="card shadow">
+        <div class="card-header text-center">
+            <h4 class="mb-0">Añadir Vinilo</h4>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" class="form-control" placeholder="Introduce el nombre" name="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" step="0.01" id="precio" class="form-control" placeholder="Introduce el precio" name="precio" required>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <input type="text" id="descripcion" class="form-control" placeholder="Introduce la descripción" name="descripcion" required>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    <input type="file" id="imagen" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="activo" checked>
+                        <label class="form-check-label" for="activo">
+                            ¿Está activo el vinilo?
+                        </label>
+                    </div>
+                </div>
+                <div class="d-grid">
+                    <button id="enviar" type="button" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+            <div id="funciona" class="mt-3 text-center"></div>
+        </div>
+    </div>
+</body>
+<script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+
+        document.querySelectorAll('.sidebarlink').forEach(link => {
+            link.addEventListener('click', function() {
+                closeNav();
+            });            
+        });
+        var acc = document.getElementsByClassName("text-button");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+
+        function toggleText(button) {
+            var container = button.previousElementSibling;
+            var fullText = container.getAttribute('data-full-text');
+            var shortText = container.getAttribute('data-short-text');
+
+            if (container.textContent === shortText + '...') {
+                container.textContent = fullText;
+                button.textContent = 'Mostrar menos';
+            } else {
+                container.textContent = shortText + '...';
+                button.textContent = 'Mostrar más';
+            }
+        }
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             function obtenerNombre() {
@@ -98,44 +179,4 @@
             });
         });
     </script>
-</head>
-<body>
-    <div class="card shadow">
-        <div class="card-header text-center">
-            <h4 class="mb-0">Añadir Vinilo</h4>
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" id="nombre" class="form-control" placeholder="Introduce el nombre" name="nombre" required>
-                </div>
-                <div class="mb-3">
-                    <label for="precio" class="form-label">Precio</label>
-                    <input type="number" step="0.01" id="precio" class="form-control" placeholder="Introduce el precio" name="precio" required>
-                </div>
-                <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripción</label>
-                    <input type="text" id="descripcion" class="form-control" placeholder="Introduce la descripción" name="descripcion" required>
-                </div>
-                <div class="mb-3">
-                    <label for="imagen" class="form-label">Imagen</label>
-                    <input type="file" id="imagen" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" id="activo" checked>
-                        <label class="form-check-label" for="activo">
-                            ¿Está activo el vinilo?
-                        </label>
-                    </div>
-                </div>
-                <div class="d-grid">
-                    <button id="enviar" type="button" class="btn btn-primary">Enviar</button>
-                </div>
-            </form>
-            <div id="funciona" class="mt-3 text-center"></div>
-        </div>
-    </div>
-</body>
 </html>
