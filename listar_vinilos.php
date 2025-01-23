@@ -16,22 +16,22 @@ if($result->num_rows > 0) {
         <th>Precio €</th>
         <th>Activo</th>
     </tr>
-    </thead>";
-    
+    </thead>
+    <tbody>"; // Mueve <tbody> fuera del bucle
 
     while($row = $result->fetch_assoc()) {
         $checked = $row['activo'] == 1 ? 'checked' : '';
-        $tabla .= "<tbody>
+        $tabla .= "
         <tr>
             <td><img src='.".$row['imagen']."' alt='Imagen de ".$row['name']."' class='img-fluid' style='max-height: 200px; object-fit: contain;'></td>
             <td>".$row['name']."</td>
             <td>".round($row['precio'], 2)." €</td>
             <td><input type='checkbox' id='activo_".$row['id']."' ".$checked." onclick='toggleActivo(".$row['id'].")'></td>
         </tr>
-        </tbody>";
+        ";
     }
     
-    $tabla .= "</table>"; //Cerrar la tabla despues de agregar todas las filas
+    $tabla .= "</tbody></table>"; // Cerrar la tabla después de agregar todas las filas
 } else {
     $tabla = "0 results";
 }
@@ -44,39 +44,54 @@ if($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles/listar.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <style>
         table {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-        background-color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
         }
-
         table td, th {
-        border: 1px solid #ddd;
-        padding: 8px;
-        width: 20%;
+            border: 1px solid #ddd;
+            padding: 8px;
+            width: 20%;
         }
-
-        table tr:hover {background-color: #ddd;}
-
+        table tr:hover {
+            background-color: #ddd;
+        }
         table th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #04AA6D;
-        color: white;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
         }
-
     </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#searchVinyl").on("input", function() {
+                var search = $(this).val();
+                $.ajax({
+                    url: "./php/search_vinilos.php",
+                    type: "POST",
+                    data: {search: search},
+                    success: function(data) {
+                        $("#tablaVinilos").html(data);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="mySidebar" class="sidebar">
@@ -101,14 +116,21 @@ if($result->num_rows > 0) {
         </button>
     </header>
 
+    <div class="search-box">
+        <button class="btn-search"><i class="material-icons">search</i></button>
+        <input type="text" class="input-search" name="searchVinyl" id="searchVinyl" placeholder="Type to Search...">
+    </div>
+
     <div class='container mt-4'>
         <div class='row justify-content-center'>
             <h2>Listado de Vinilos</h2>
             <div class="d-grid mt-3" style="text-align: center;">
-            <button class="btn btn-primary mt-3" onclick='activarTodos()'>Activar Todos</button>
-            <button class="btn btn-danger mt-3 mb-3" onclick='desactivarTodos()'>Desactivar Todos</button>
+                <button class="btn btn-primary mt-3" onclick='activarTodos()'>Activar Todos</button>
+                <button class="btn btn-danger mt-3 mb-3" onclick='desactivarTodos()'>Desactivar Todos</button>
             </div>
-            <?php echo $tabla;?>
+            <div id="tablaVinilos">
+                <?php echo $tabla; ?>
+            </div>
         </div>
     </div>
 
@@ -132,11 +154,12 @@ if($result->num_rows > 0) {
             <p>&copy; 2024 Vinyl Zone. Todos los derechos reservados.</p>
         </div>
     </footer>
-</body>
-<script>
+
+    <script>
         function openNav() {
             document.getElementById("mySidebar").style.width = "250px";
         }
+
         function closeNav() {
             document.getElementById("mySidebar").style.width = "0";
         }
@@ -146,6 +169,7 @@ if($result->num_rows > 0) {
                 closeNav();
             });            
         });
+
         var acc = document.getElementsByClassName("text-button");
         for (var i = 0; i < acc.length; i++) {
             acc[i].addEventListener("click", function() {
@@ -158,8 +182,7 @@ if($result->num_rows > 0) {
                 }
             });
         }
-    </script>
-    <script>
+
         function toggleActivo(id) {
             var checkbox = document.getElementById('activo_' + id);
             var activo = checkbox.checked ? 1 : 0;
@@ -197,4 +220,5 @@ if($result->num_rows > 0) {
             });
         }
     </script>
+</body>
 </html>
