@@ -1,3 +1,4 @@
+<!-- PHP: Código completo con ajustes -->
 <?php
 include_once('./php/configuration.php');
 $sql = "SELECT * FROM vinilos";
@@ -7,14 +8,19 @@ $tabla = "<div class='container mt-4'><div class='row justify-content-center'>";
 if ($result->num_rows > 0) {    
     // Generar las filas dentro del bucle
     while ($row = $result->fetch_assoc()) {
+        $descripcion = $row['descripcion'];
+        $descripcionCorta = substr($descripcion, 0, 200);
+        $descripcionLarga = $descripcion;
+
         $tabla .= "
             <div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex justify-content-center align-items-stretch'>
-                <div class='card shadow-sm' style='border-radius: 20px; max-width: 100%;'>
+                <div class='card shadow-sm' style='border-radius: 20px; max-width: 120%; width: 120%;'> <!-- Ajuste de ancho de la card -->
                     <img src='." . $row["imagen"] . "' alt='Imagen de " . $row["name"] . "' class='img-fluid' style='max-height: 200px; object-fit: contain;'>
                     <div class='card-body' style='background-color:rgb(227, 227, 227); border-radius: 0 0 20px 20px;'>
                         <h5 class='card-title'>" . $row['name'] . "</h5>
                         <p style='font-size:20px; margin-top:15px; margin-left:10%;font-weight: bold; color:red'>" . $row["precio"] . "€</p>
-                        <p style='margin-bottom: 0px;' class='card-text'>Descripción: " . $row['descripcion'] . "</p>
+                        <p class='card-text text-container' data-full-text='" . $descripcionLarga . "' data-short-text='" . $descripcionCorta . "'>" . ((strlen($descripcion) > 200) ? $descripcionCorta . "..." : $descripcion) . "</p>
+                        <button class='show-more-button' onclick='toggleText(this)'>Mostrar más</button>
                     </div>
                 </div>
             </div>
@@ -25,17 +31,33 @@ $tabla .= "</div></div>"; // Cerrar el contenedor y la fila
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        .text-container {
+            transition: height 0.3s ease;
+        }
+        .show-more-button {
+            margin-top: 10px;
+            background-color: brown;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .show-more-button:hover {
+            background-color: brown;
+        }
+    </style>
 </head>
 <body>
     <div id="mySidebar" class="sidebar">
@@ -91,7 +113,7 @@ $tabla .= "</div></div>"; // Cerrar el contenedor y la fila
         }
 
         document.querySelectorAll('.sidebarlink').forEach(link => {
-            link.addEventListener('click', function(){
+            link.addEventListener('click', function() {
                 closeNav();
             });            
         });
@@ -104,6 +126,30 @@ $tabla .= "</div></div>"; // Cerrar el contenedor y la fila
                     panel.style.display = "none";
                 } else {
                     panel.style.display = "block";
+                }
+            });
+        }
+
+        function toggleText(button) {
+            var container = button.previousElementSibling;
+            var fullText = container.getAttribute('data-full-text');
+            var shortText = container.getAttribute('data-short-text');
+
+            if (container.textContent === shortText + '...') {
+                container.textContent = fullText;
+                button.textContent = 'Mostrar menos';
+            } else {
+                container.textContent = shortText + '...';
+                button.textContent = 'Mostrar más';
+            }
+        }
+
+        window.onload = function() {
+            var containers = document.querySelectorAll('.card-text');
+            containers.forEach(container => {
+                var fullText = container.getAttribute('data-full-text');
+                if (fullText.length > 200) {
+                    container.textContent = container.getAttribute('data-short-text') + '...';
                 }
             });
         }
