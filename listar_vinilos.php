@@ -26,7 +26,7 @@ if($result->num_rows > 0) {
             <td><img src='.".$row['imagen']."' alt='Imagen de ".$row['name']."' class='img-fluid' style='max-height: 200px; object-fit: contain;'></td>
             <td>".$row['name']."</td>
             <td>".round($row['precio'], 2)." €</td>
-            <td><input type='checkbox' id='activo_".$row['id']."' ".$checked." onclick='toggleActivo(".$row['id'].")'></td>
+            <td><input type='checkbox' id='".$row['id']."' ".$checked." onclick='toggleActivo(".$row['id'].")'></td>
         </tr>
         ";
     }
@@ -184,18 +184,22 @@ if($result->num_rows > 0) {
         }
 
         function toggleActivo(id) {
-            var checkbox = document.getElementById('activo_' + id);
+            var checkbox = document.getElementById(id);
             var activo = checkbox.checked ? 1 : 0;
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "./php/update_vinilos_ajax.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log(xhr.responseText);
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log("Respuesta del servidor: " + xhr.responseText);
+                    } else {
+                        console.error("Error en la solicitud AJAX");
+                    }
                 }
             };
-            xhr.send("id=" + id + "&activo=" + activo);
+            xhr.send("id=" + encodeURIComponent(id) + "&activo=" + encodeURIComponent(activo));
         }
 
         function activarTodos() {

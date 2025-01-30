@@ -1,15 +1,23 @@
 <?php
-include_once('./php/configuration.php');
+include_once('configuration.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = intval($_POST['id']);
-    $activo = intval($_POST['activo']);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+    $activo = isset($_POST['activo']) ? intval($_POST['activo']) : 0;
 
-    $sql = "UPDATE vinilos SET activo = $activo WHERE id = $id";
-    if ($conn->query($sql) === TRUE) {
-        echo "Record updated successfully";
+    if ($id > 0) {
+        $sql = "UPDATE vinilos SET activo = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $activo, $id);
+        if ($stmt->execute()) {
+            echo "OK";
+        } else {
+            echo "Error al actualizar el registro";
+        }
+        $stmt->close();
     } else {
-        echo "Error updating record: " . $conn->error;
+        echo "ID no válido";
     }
 }
+$conn->close();
 ?>

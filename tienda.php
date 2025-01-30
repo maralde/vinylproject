@@ -1,7 +1,7 @@
 <!-- PHP: Código completo con ajustes -->
 <?php
 include_once('./php/configuration.php');
-$sql = "SELECT * FROM vinilos";
+$sql = "SELECT * FROM vinilos WHERE activo = 1";
 $result = $conn->query($sql);
 
 $tabla = "<div class='container mx-auto mt-4'><div class='flex flex-wrap justify-center'>"; // Inicio del contenedor y fila
